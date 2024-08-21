@@ -1,21 +1,13 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Maui.Controls;
 
 namespace FreshMvvm.Maui.IOC
 {
     public static class DependancyService
     {
-        private static IServiceScope scope;
-
-        /// <summary>
-        /// REgisters the service provider and creates a dependency scope
-        /// </summary>
-        /// <param name="sp"></param>
-        public static void RegisterServiceProvider(IServiceProvider sp)
-        {
-            scope = sp.CreateScope();
-        }
-
+        public static IServiceProvider Services => Application.Current!.Handler!.MauiContext!.Services;
+        
         /// <summary>
         /// Returns a resolved instance of the requested type.
         /// </summary>
@@ -23,14 +15,14 @@ namespace FreshMvvm.Maui.IOC
         /// <returns></returns>
         public static T Resolve<T>() where T : class
         {
-            var result = scope.ServiceProvider.GetRequiredService<T>();
+            var result = Services.GetRequiredService<T>();
 
             return result;
         }
 
         public static object Resolve(Type serviceType)
         {
-            var result = scope.ServiceProvider.GetRequiredService(serviceType);
+            var result = Services.GetRequiredService(serviceType);
 
             return result;
         }

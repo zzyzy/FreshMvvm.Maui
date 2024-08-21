@@ -28,6 +28,8 @@ namespace FreshMvvm.Maui
 
         Task PushPageModel (Type pageModelType, object data, bool modal = false, bool animate = true);
 
+        Task PushPageModel<TViewModel>(TViewModel viewModel, bool modal = false, bool animate = true) where TViewModel : FreshBasePageModel;
+
         /// <summary>
         /// Removes current page/pagemodel from navigation
         /// </summary>

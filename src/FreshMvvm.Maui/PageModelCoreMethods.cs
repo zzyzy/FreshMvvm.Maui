@@ -73,6 +73,11 @@ namespace FreshMvvm.Maui
             return PushPageModel(pageModel, data, modal, animate);
         }
 
+        public Task PushPageModel<TViewModel>(TViewModel viewModel, bool modal = false, bool animate = true) where TViewModel : FreshBasePageModel
+        {
+            return PushPageModel(viewModel, null, modal, animate);
+        }
+
         async Task PushPageModel(FreshBasePageModel pageModel, object data, bool modal = false, bool animate = true)
         {
             var page = FreshPageModelResolver.ResolvePageModel(data, pageModel);
@@ -135,7 +140,7 @@ namespace FreshMvvm.Maui
 
         public Task PushPageModel<T> (bool animate = true) where T : FreshBasePageModel
         {
-            return PushPageModel<T> (null, false, animate);
+            return PushPageModel<T> (data: null, false, animate);
         }
 
         public Task PushPageModel<T, TPage> (bool animate = true) where T : FreshBasePageModel where TPage : Page

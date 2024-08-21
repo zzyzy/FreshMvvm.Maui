@@ -1,21 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
-		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows')) and '$(MSBuildRuntimeType)' == 'Full'">$(TargetFrameworks);net6.0-windows10.0.19041</TargetFrameworks>
-		<TargetPlatformMinVersion Condition="$(TargetFramework.Contains('-windows'))">10.0.17763.0</TargetPlatformMinVersion>
+		<TargetFramework>net8.0</TargetFramework>
 		<UseMaui>true</UseMaui>
 		<SingleProject>true</SingleProject>
 
-		<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-ios'">14.2</SupportedOSPlatformVersion>
-		<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-maccatalyst'">14.0</SupportedOSPlatformVersion>
-		<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-android'">21.0</SupportedOSPlatformVersion>
-		<SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('-windows'))">10.0.18362.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net8.0-ios'">14.2</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net8.0-android'">21.0</SupportedOSPlatformVersion>
 
 		<Authors>rid00z</Authors>
 		<PackageId>FreshMvvm.Maui</PackageId>
 		<Company>FreshMvvm</Company>
-		<Version>0.0.4</Version>
+		<Version>0.0.5+anacle.1</Version>
 		<PackageLicenseUrl>https://github.com/XAM-Consulting/FreshMvvm.Maui/blob/main/LICENSE</PackageLicenseUrl>
 		<Description>FreshMvvm.Maui the famous FreshMvvm framwork, working on MAUI, Simple and easy Mvvm</Description>
 		<RepositoryUrl>https://github.com/XAM-Consulting/FreshMvvm.Maui</RepositoryUrl>
@@ -29,9 +25,11 @@
         </PackageReleaseNotes>
 		<ReleaseVersion>0.4</ReleaseVersion>
 	</PropertyGroup>
-
-	<ItemGroup>
-	  <PackageReference Include="System.Reactive" Version="5.0.0" />
-	</ItemGroup>
+	
+	<PropertyGroup>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	</PropertyGroup>
 
 </Project>

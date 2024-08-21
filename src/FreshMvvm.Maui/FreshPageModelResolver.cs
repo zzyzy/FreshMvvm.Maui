@@ -6,8 +6,6 @@ namespace FreshMvvm.Maui
 {
     public static class FreshPageModelResolver
     {
-        public static IFreshPageModelMapper PageModelMapper { get; set; } = new FreshPageModelMapper();
-
         public static Page ResolvePageModel<T> () where T : FreshBasePageModel
         {
             return ResolvePageModel<T> (null);
@@ -34,7 +32,8 @@ namespace FreshMvvm.Maui
 
         public static Page ResolvePageModel (Type type, object data, FreshBasePageModel pageModel)
         {
-            var name = PageModelMapper.GetPageTypeName (type);
+            var modelMapper = DependancyService.Resolve<IFreshPageModelMapper>();
+            var name = modelMapper.GetPageTypeName (type);
             var pageType = Type.GetType (name);
             if (pageType == null)
                 throw new Exception (name + " not found");
@@ -48,13 +47,14 @@ namespace FreshMvvm.Maui
 
         public static Page BindingPageModel(object data, Page targetPage, FreshBasePageModel pageModel)
         {
-            pageModel.WireEvents (targetPage);
+            var pageModelCoreMethodFactory = DependancyService.Resolve<IPageModelCoreMethodsFactory>();
+            pageModel.WireEvents(targetPage);
             pageModel.CurrentPage = targetPage;
-            pageModel.CoreMethods = new PageModelCoreMethods (targetPage, pageModel);
-            pageModel.Init (data);
+            pageModel.CoreMethods = pageModelCoreMethodFactory.Create(targetPage, pageModel);
+            pageModel.Init(data);
             targetPage.BindingContext = pageModel;
             return targetPage;
-        }            
+        }
     }
 }
 
