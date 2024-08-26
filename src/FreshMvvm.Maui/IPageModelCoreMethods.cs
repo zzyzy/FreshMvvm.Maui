@@ -54,6 +54,8 @@ namespace FreshMvvm.Maui
         /// </summary>
         /// <returns>Returns the name of the new service</returns>
         Task<FreshNavigationContainer> PushPageModelWithNewNavigation<T> (object data, bool animate = true) where T : FreshBasePageModel;
+        
+        Task<FreshNavigationContainer> PushPageModelWithNewNavigation<T> (T viewModel, object data, bool animate = true) where T : FreshBasePageModel;
 
         Task PushNewNavigationServiceModal (IFreshNavigationService newNavigationService, FreshBasePageModel[] basePageModels, bool animate = true);
 

@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using Microsoft.Maui;
 
 namespace FreshMvvm.Maui
 {
@@ -13,13 +14,19 @@ namespace FreshMvvm.Maui
     {
         NavigationPage _navigationPage;
 
+        protected WeakEventManager EventManager { get; } = new();
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
         /// This event is raise when a page is Popped, this might not be raise everytime a page is Popped. 
         /// Note* this might be raised multiple times. 
         /// </summary>
-        public event EventHandler PageWasPopped;
+        public event EventHandler PageWasPopped
+        {
+            add => EventManager.AddEventHandler(value);
+            remove => EventManager.RemoveEventHandler(value);
+        }
 
         /// <summary>
         /// This property is used by the FreshBaseContentPage and allows you to set the toolbar items on the page.
@@ -144,8 +151,7 @@ namespace FreshMvvm.Maui
 
         public void RaisePageWasPopped()
         {
-            if (PageWasPopped != null)
-                PageWasPopped(this, EventArgs.Empty);
+            EventManager.HandleEvent(this, EventArgs.Empty, nameof(PageWasPopped));
 
             var navPage = (this.CurrentPage.Parent as NavigationPage);
             if (navPage != null)

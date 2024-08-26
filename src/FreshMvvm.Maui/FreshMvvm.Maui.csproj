@@ -11,7 +11,7 @@
 		<Authors>rid00z</Authors>
 		<PackageId>FreshMvvm.Maui</PackageId>
 		<Company>FreshMvvm</Company>
-		<Version>0.0.5+anacle.1</Version>
+		<Version>0.0.5-anacle.3</Version>
 		<PackageLicenseUrl>https://github.com/XAM-Consulting/FreshMvvm.Maui/blob/main/LICENSE</PackageLicenseUrl>
 		<Description>FreshMvvm.Maui the famous FreshMvvm framwork, working on MAUI, Simple and easy Mvvm</Description>
 		<RepositoryUrl>https://github.com/XAM-Consulting/FreshMvvm.Maui</RepositoryUrl>

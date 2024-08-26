@@ -249,6 +249,14 @@ namespace FreshMvvm.Maui
             return naviationContainer;
         }
 
+        public async Task<FreshNavigationContainer> PushPageModelWithNewNavigation<T> (T viewModel, object data, bool animate = true) where T : FreshBasePageModel
+        {
+            var page = FreshPageModelResolver.ResolvePageModel(data, viewModel);
+            var naviationContainer = new FreshNavigationContainer(page);
+            await PushNewNavigationServiceModal(naviationContainer, page.GetModel(), animate);
+            return naviationContainer;
+        }
+
 		public void BatchBegin()
 		{
 			_currentPage.BatchBegin ();
